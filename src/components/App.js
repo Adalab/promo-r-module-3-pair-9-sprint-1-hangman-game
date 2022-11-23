@@ -1,16 +1,31 @@
 // Fichero src/components/App.js
 import '../styles/App.scss';
 import { useState } from 'react';
+import { validLetter } from './Regex.js';
 
 function App() {
   const [numberOfErrors, setNumberOfErrors] = useState(0);
   const handleClick = (event) => {
     event.preventDefault();
-    let clicks = 0;
-    clicks++;
-    /* useState++; */
-    setNumberOfErrors(clicks);
+    const n = numberOfErrors + 1;
+    setNumberOfErrors(n);
+    console.log(n);
   };
+  const [lastLetter, setLastLetter] = useState('');
+  const handleInput = (event) => {
+    let letter = '';
+    if (event.target.value === validLetter) {
+      letter = event.target.value;
+    } else {
+      letter= 'p';
+    }
+
+    setLastLetter(letter);
+  }
+  const handleForm = (event) => {
+    event.preventDefault();
+  }
+
 
   return (
     <div className="page">
@@ -45,7 +60,7 @@ function App() {
               <li className="letter">x</li>
             </ul>
           </div>
-          <form className="form">
+          <form className="form" onSubmit={handleForm}>
             <label className="title" htmlFor="last-letter">
               Escribe una letra:
             </label>
@@ -56,10 +71,12 @@ function App() {
               type="text"
               name="last-letter"
               id="last-letter"
+              onChange={handleInput}
+              value={lastLetter}
             />
           </form>
         </section>
-        <section className={`dummy error- ${numberOfErrors}`}>
+        <section className={`dummy error-${numberOfErrors}`}>
           <span className="error-13 eye"></span>
           <span className="error-12 eye"></span>
           <span className="error-11 line"></span>

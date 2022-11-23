@@ -1,0 +1,1 @@
+export const validLetter = new RegExp ('^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]$');
