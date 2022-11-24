@@ -1,9 +1,27 @@
 // Fichero src/components/App.js
 import '../styles/App.scss';
-import { useState } from 'react';
-import { validLetter } from './Regex.js';
+import React, { useState } from 'react';
+// import { validLetter } from './Regex.js';
 
 function App() {
+  // TODO: ej 1 arrays
+  // const [word, setWord] = useState('katakroker');
+  // const renderSolutionLetters = () => {
+  //   return (
+  //   <React.Fragment key={}>
+  //   <li className="letter">k</li>
+  //   <li className="letter">a</li>
+  //   <li className="letter"></li>
+  //   <li className="letter">a</li>
+  //   <li className="letter">k</li>
+  //   <li className="letter">r</li>
+  //   <li className="letter"></li>
+  //   <li className="letter">k</li>
+  //   <li className="letter">e</li>
+  //   <li className="letter">r</li>
+  //   </React.Fragment>
+  //   )
+  // }
   const [numberOfErrors, setNumberOfErrors] = useState(0);
   const handleClick = (event) => {
     event.preventDefault();
@@ -13,15 +31,13 @@ function App() {
   };
   const [lastLetter, setLastLetter] = useState('');
   const handleInput = (event) => {
-    let letter = '';
-    if (event.target.value === validLetter) {
-      letter = event.target.value;
+    if (/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]$/.test(event.target.value)) {
+      setLastLetter(event.target.value);
     } else {
-      letter= 'p';
+      setLastLetter('');
     }
-
-    setLastLetter(letter);
   }
+
   const handleForm = (event) => {
     event.preventDefault();
   }
@@ -38,7 +54,7 @@ function App() {
           <div className="solution">
             <h2 className="title">Solución:</h2>
             <ul className="letters">
-              <li className="letter">k</li>
+              {/* <li className="letter">k</li>
               <li className="letter">a</li>
               <li className="letter"></li>
               <li className="letter">a</li>
@@ -47,7 +63,8 @@ function App() {
               <li className="letter"></li>
               <li className="letter">k</li>
               <li className="letter">e</li>
-              <li className="letter">r</li>
+              <li className="letter">r</li> */}
+              {/* TODO: aquí va la variable */}
             </ul>
           </div>
           <div className="error">
@@ -71,6 +88,7 @@ function App() {
               type="text"
               name="last-letter"
               id="last-letter"
+              // pattern="[A-Za-zÑñÁáÉéÍíÓóÚúÜü]"
               onChange={handleInput}
               value={lastLetter}
             />
